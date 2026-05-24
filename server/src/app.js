@@ -31,6 +31,16 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Suugaanta Soomaliyeed API is running",
+    health: "/api/health",
+    documentation: "Use /api routes for archive resources.",
+    environment: env.nodeEnv,
+  });
+});
+
 app.get("/api/health", (_req, res) => {
   res.status(200).json({
     success: true,
