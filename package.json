@@ -1,0 +1,24 @@
+{
+  "name": "suugaanta-soomaliyeed",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "npm-run-all --parallel dev:client dev:server",
+    "dev:client": "npm run dev --workspace client",
+    "dev:server": "npm run dev --workspace server",
+    "build": "npm run build --workspace client",
+    "start": "npm run start --workspace server",
+    "seed:admin": "npm run seed:admin --workspace server",
+    "repair:admin": "npm run repair:admin --workspace server",
+    "migrate:authors": "npm run migrate:authors --workspace server",
+    "migrate:author-identities": "npm run migrate:author-identities --workspace server",
+    "merge:author-duplicates": "npm run merge:author-duplicates --workspace server"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
