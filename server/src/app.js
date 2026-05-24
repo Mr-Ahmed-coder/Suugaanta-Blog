@@ -8,6 +8,8 @@ import path from "path";
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 // Serve local uploads folder publicly for fallback media storage
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 

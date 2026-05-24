@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import ApiError from "../utils/api-error.js";
 import asyncHandler from "../utils/async-handler.js";
+import env from "../config/env.js";
 
 /**
  * Middleware to protect routes against unauthenticated requests.
@@ -24,8 +25,16 @@ export const protect = asyncHandler(async (req, _res, next) => {
   // 2. Verify token
   let decoded;
   try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET || "your_jwt_secret_key");
+    if (!env.jwtSecret) {
+      throw new ApiError(500, "JWT_SECRET is missing from the server environment.");
+    }
+
+    decoded = jwt.verify(token, env.jwtSecret);
   } catch (error) {
+    if (error instanceof ApiError) {
+      throw error;
+    }
+
     if (error.name === "TokenExpiredError") {
       throw new ApiError(401, "Your login session has expired. Please log in again.");
     }

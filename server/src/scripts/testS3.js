@@ -8,19 +8,20 @@ const {
   AWS_ACCESS_KEY_ID,
   AWS_SECRET_ACCESS_KEY,
   AWS_REGION,
+  AWS_BUCKET_NAME,
   AWS_S3_BUCKET_NAME,
 } = process.env;
 
 const awsId = (AWS_ACCESS_KEY_ID || "").trim();
 const awsSecret = (AWS_SECRET_ACCESS_KEY || "").trim();
 const awsReg = (AWS_REGION || "").trim();
-const awsBucket = (AWS_S3_BUCKET_NAME || "").trim();
+const awsBucket = (AWS_BUCKET_NAME || AWS_S3_BUCKET_NAME || "").trim();
 
 console.log("Testing S3 client initialization with parameters:");
-console.log("- AWS_ACCESS_KEY_ID:", awsId ? `[FOUND: ${awsId.substring(0, 8)}...]` : "[NOT FOUND]");
+console.log("- AWS_ACCESS_KEY_ID:", awsId ? "[FOUND]" : "[NOT FOUND]");
 console.log("- AWS_SECRET_ACCESS_KEY:", awsSecret ? "[FOUND]" : "[NOT FOUND]");
 console.log("- AWS_REGION:", awsReg);
-console.log("- AWS_S3_BUCKET_NAME:", awsBucket);
+console.log("- AWS_BUCKET_NAME:", awsBucket ? "[FOUND]" : "[NOT FOUND]");
 
 const client = new S3Client({
   credentials: {

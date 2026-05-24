@@ -4,28 +4,38 @@ import User from "../models/User.js";
 
 dotenv.config();
 
-const { MONGODB_URI } = process.env;
-const mongoUri = MONGODB_URI || "mongodb://localhost:27017/suugaanta-soomaliyeed";
+const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+const adminName = process.env.SEED_ADMIN_NAME || "Admin Suugaanta";
+const adminEmail = process.env.SEED_ADMIN_EMAIL || "admin@suugaanta.com";
+const adminPassword = process.env.SEED_ADMIN_PASSWORD;
 
 const run = async () => {
   try {
+    if (!mongoUri) {
+      throw new Error("MONGODB_URI is required.");
+    }
+
+    if (!adminPassword) {
+      throw new Error("SEED_ADMIN_PASSWORD is required.");
+    }
+
     await mongoose.connect(mongoUri);
     console.log("Connected to MongoDB.");
 
-    let user = await User.findOne({ email: "admin@suugaanta.com" });
+    let user = await User.findOne({ email: adminEmail });
     if (user) {
-      user.password = "adminpassword123";
+      user.password = adminPassword;
       user.role = "admin";
       await user.save();
-      console.log("Updated existing admin user password to: adminpassword123");
+      console.log(`Updated existing admin user: ${adminEmail}`);
     } else {
       user = await User.create({
-        name: "Admin Suugaanta",
-        email: "admin@suugaanta.com",
-        password: "adminpassword123",
+        name: adminName,
+        email: adminEmail,
+        password: adminPassword,
         role: "admin",
       });
-      console.log("Created new admin user with email: admin@suugaanta.com and password: adminpassword123");
+      console.log(`Created new admin user: ${adminEmail}`);
     }
   } catch (err) {
     console.error("Error:", err);

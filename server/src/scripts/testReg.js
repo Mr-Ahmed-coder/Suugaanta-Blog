@@ -1,12 +1,11 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
-import fetch from "node-fetch";
 
-dotenv.config({ path: "../../.env" });
+dotenv.config();
 
 async function testRegistration() {
   try {
-    const res = await fetch("http://localhost:5000/api/auth/register", {
+    const apiBaseUrl = process.env.API_BASE_URL || `http://localhost:${process.env.PORT || 5000}/api`;
+    const res = await fetch(`${apiBaseUrl}/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

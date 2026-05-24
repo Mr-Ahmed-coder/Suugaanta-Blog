@@ -16,7 +16,7 @@ const getS3Client = () => {
   const awsId = (process.env.AWS_ACCESS_KEY_ID || "").trim();
   const awsSecret = (process.env.AWS_SECRET_ACCESS_KEY || "").trim();
   const awsRegion = (process.env.AWS_REGION || "").trim();
-  const awsBucket = (process.env.AWS_S3_BUCKET_NAME || "").trim();
+  const awsBucket = (env.awsBucketName || "").trim();
 
   if (awsId && awsSecret && awsRegion && awsBucket) {
     s3Client = new S3Client({
@@ -61,7 +61,7 @@ export const uploadFile = async (file, folder) => {
   const key = `${folder}/${cleanName}`;
 
   const client = getS3Client();
-  const awsBucket = (process.env.AWS_S3_BUCKET_NAME || "").trim();
+  const awsBucket = (env.awsBucketName || "").trim();
   const awsRegion = (process.env.AWS_REGION || "").trim();
 
   if (client && awsBucket) {
@@ -93,6 +93,6 @@ export const uploadFile = async (file, folder) => {
   await fs.writeFile(filePath, file.buffer);
   
   // Construct local server public URL
-  const serverPort = env.port || 5000;
-  return `http://localhost:${serverPort}/uploads/${folder}/${cleanName}`;
+  const publicBaseUrl = env.serverUrl.replace(/\/$/, "");
+  return `${publicBaseUrl}/uploads/${folder}/${cleanName}`;
 };

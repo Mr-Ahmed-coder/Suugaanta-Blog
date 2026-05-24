@@ -8,13 +8,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
-const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI || "mongodb://127.0.0.1:27017/suugaanta";
+const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
 const ADMIN_NAME = process.env.SEED_ADMIN_NAME || "Super Admin";
 const ADMIN_EMAIL = process.env.SEED_ADMIN_EMAIL || "admin@suugaanta.com";
 const ADMIN_PASSWORD = process.env.SEED_ADMIN_PASSWORD || "Admin123!";
 
 const seedAdmin = async () => {
   try {
+    if (!MONGO_URI) {
+      throw new Error("MONGODB_URI is missing. Add it to server/.env or your deployment environment.");
+    }
+
     console.log("Connecting to MongoDB...");
     await mongoose.connect(MONGO_URI);
     console.log("MongoDB connected successfully.");
@@ -42,7 +46,7 @@ const seedAdmin = async () => {
     
     console.log("✅ Root admin created successfully!");
     console.log(`Email: ${ADMIN_EMAIL}`);
-    console.log(`Password: ${ADMIN_PASSWORD}`);
+    console.log("Password: [configured SEED_ADMIN_PASSWORD]");
     console.log("Please log in and change this password immediately in production.");
 
     process.exit(0);

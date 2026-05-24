@@ -3,14 +3,15 @@ import User from "../models/User.js";
 import ApiError from "../utils/api-error.js";
 import asyncHandler from "../utils/async-handler.js";
 import { sendSuccess } from "../utils/api-response.js";
+import env from "../config/env.js";
 
 // Helper function to sign JWT tokens
 const signToken = (id) => {
-  return jwt.sign(
-    { id },
-    process.env.JWT_SECRET || "your_jwt_secret_key",
-    { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
-  );
+  if (!env.jwtSecret) {
+    throw new ApiError(500, "JWT_SECRET is missing from the server environment.");
+  }
+
+  return jwt.sign({ id }, env.jwtSecret, { expiresIn: env.jwtExpiresIn });
 };
 
 // Helper function to send token securely in cookies
@@ -23,8 +24,8 @@ const sendTokenResponse = (user, statusCode, message, res) => {
       Date.now() + 24 * 60 * 60 * 1000 // expires in 1 day (default matches 1d expire config)
     ),
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: env.nodeEnv === "production",
+    sameSite: env.nodeEnv === "production" ? "none" : "lax",
   };
 
   // Strip password before sending response
@@ -93,8 +94,8 @@ export const logout = asyncHandler(async (req, res) => {
   res.cookie("token", "loggedout", {
     expires: new Date(Date.now() + 10 * 1000), // expires in 10 seconds
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: env.nodeEnv === "production",
+    sameSite: env.nodeEnv === "production" ? "none" : "lax",
   });
 
   return sendSuccess(res, 200, "Logout completed successfully!");

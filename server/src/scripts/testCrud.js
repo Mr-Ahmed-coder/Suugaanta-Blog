@@ -8,14 +8,19 @@ dotenv.config();
 
 const { MONGODB_URI, JWT_SECRET, PORT } = process.env;
 const port = PORT || 5000;
-const mongoUri = MONGODB_URI || "mongodb://localhost:27017/suugaanta-soomaliyeed";
+const mongoUri = MONGODB_URI || process.env.MONGO_URI;
+const apiBaseUrl = process.env.API_BASE_URL || `http://localhost:${port}/api`;
 
-console.log("Database URI:", mongoUri);
-console.log("JWT Secret:", JWT_SECRET || "your_jwt_secret_key");
+console.log("Database URI configured:", Boolean(mongoUri));
+console.log("JWT secret configured:", Boolean(JWT_SECRET));
 
 const runTest = async () => {
   try {
     // 1. Connect to MongoDB
+    if (!mongoUri || !JWT_SECRET) {
+      throw new Error("MONGODB_URI and JWT_SECRET are required for this script.");
+    }
+
     await mongoose.connect(mongoUri);
     console.log("Connected to MongoDB successfully.");
 
@@ -42,10 +47,10 @@ const runTest = async () => {
     // 3. Generate JWT Token
     const token = jwt.sign(
       { id: user._id },
-      JWT_SECRET || "your_jwt_secret_key",
+      JWT_SECRET,
       { expiresIn: "1h" }
     );
-    console.log("Generated token:", token);
+    console.log("Generated test token for local request.");
 
     // 4. Send POST request to /api/songs
     const songPayload = {
@@ -59,7 +64,7 @@ const runTest = async () => {
 
     console.log("Sending GET request to /api/authors?sort=newest...");
     try {
-      const response = await axios.get(`http://localhost:${port}/api/authors?sort=newest`, {
+      const response = await axios.get(`${apiBaseUrl}/authors?sort=newest`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
