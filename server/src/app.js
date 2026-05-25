@@ -14,18 +14,24 @@ app.set("trust proxy", 1);
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // Cross-origin settings are centralized here so frontend deployment changes stay easy to manage.
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin || env.allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
+const corsOptions = {
+  origin(origin, callback) {
+    const normalizedOrigin = origin ? env.normalizeOrigin(origin) : "";
 
-      return callback(new Error(`CORS blocked origin: ${origin}`));
-    },
-    credentials: true,
-  })
-);
+    if (!origin || env.allowedOrigins.includes(normalizedOrigin)) {
+      return callback(null, true);
+    }
+
+    console.warn(`CORS blocked origin: ${origin}`);
+    return callback(new Error(`CORS blocked origin: ${origin}`));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());

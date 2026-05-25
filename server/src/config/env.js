@@ -3,10 +3,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const nodeEnv = process.env.NODE_ENV || "development";
+const normalizeOrigin = (origin) => origin.trim().replace(/\/+$/, "");
 const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
 const configuredOrigins = clientUrl
   .split(",")
-  .map((origin) => origin.trim())
+  .map(normalizeOrigin)
   .filter(Boolean);
 
 const allowedOrigins =
@@ -22,6 +23,7 @@ const env = {
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "1d",
   clientUrl,
   allowedOrigins,
+  normalizeOrigin,
   serverUrl:
     process.env.SERVER_URL ||
     process.env.RENDER_EXTERNAL_URL ||

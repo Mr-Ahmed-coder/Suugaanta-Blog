@@ -24,6 +24,7 @@ const sendTokenResponse = (user, statusCode, message, res) => {
       Date.now() + 24 * 60 * 60 * 1000 // expires in 1 day (default matches 1d expire config)
     ),
     httpOnly: true,
+    path: "/",
     secure: env.nodeEnv === "production",
     sameSite: env.nodeEnv === "production" ? "none" : "lax",
   };
@@ -94,6 +95,7 @@ export const logout = asyncHandler(async (req, res) => {
   res.cookie("token", "loggedout", {
     expires: new Date(Date.now() + 10 * 1000), // expires in 10 seconds
     httpOnly: true,
+    path: "/",
     secure: env.nodeEnv === "production",
     sameSite: env.nodeEnv === "production" ? "none" : "lax",
   });

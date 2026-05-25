@@ -117,7 +117,7 @@ Backend: Render
 - Start command from `server`: `npm run start`
 - Add all backend environment variables in Render dashboard.
 - Set `NODE_ENV=production` so auth cookies use `Secure` and `SameSite=None` for Vercel-to-Render sessions.
-- Set `CLIENT_URL` to the exact Vercel frontend URL. Multiple origins may be comma-separated for preview/staging.
+- Set `CLIENT_URL` to the exact Vercel frontend URL. Multiple origins may be comma-separated for preview/staging. Trailing slashes are normalized, but the domain must still be correct.
 - Set `SERVER_URL` to the Render backend URL so any fallback local upload URLs are public.
 
 Database: MongoDB Atlas
