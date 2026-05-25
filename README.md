@@ -23,7 +23,7 @@ Suugaanta-Blog/
 
 ## Environment Setup
 
-Copy the example file before running the backend:
+Copy the example file before running locally:
 
 ```bash
 cp server/.env.example server/.env
@@ -72,7 +72,7 @@ Build the frontend:
 npm run build
 ```
 
-Start the backend:
+Start the production server:
 
 ```bash
 npm run start
@@ -100,32 +100,44 @@ npm run repair:admin
 
 Public registration always creates regular `user` accounts. Admin/editor roles must be managed through the protected admin system.
 
-## Deployment Targets
+## Single-Service Render Deployment
 
-Frontend: Vercel
+Use one Render Web Service for both the frontend and backend.
 
-- Root directory: `client`
-- Build command: `npm run build`
-- Output directory: `dist`
-- Configure `VITE_API_URL` to point at the deployed backend API, for example `https://your-render-service.onrender.com/api`.
+- Root Directory: leave blank at repository root
+- Build Command: `npm install && npm run build`
+- Start Command: `npm run start`
+- Health Check Path: `/api/health`
+- Frontend is served by Express from `client/dist`
+- API routes remain under `/api`
+- Set `VITE_API_URL=/api` or omit it so the frontend uses same-origin API requests
+- Do not set the Render root directory to `server` for this deployment mode
 
-Backend: Render
+Required Render environment variables:
 
-- Root directory: repository root or `server`, depending on Render setup
-- Build command: `npm install`
-- Start command from repository root: `npm run start`
-- Start command from `server`: `npm run start`
-- Add all backend environment variables in Render dashboard.
-- Set `NODE_ENV=production` so auth cookies use `Secure` and `SameSite=None` for Vercel-to-Render sessions.
-- Set `CLIENT_URL` to the exact Vercel frontend URL. Multiple origins may be comma-separated for preview/staging. Trailing slashes are normalized, but the domain must still be correct.
-- Set `SERVER_URL` to the Render backend URL so any fallback local upload URLs are public.
+```env
+NODE_ENV=production
+PORT=5000
+CLIENT_URL=https://suugaanta-blog.onrender.com
+SERVER_URL=https://suugaanta-blog.onrender.com
+VITE_API_URL=/api
+MONGODB_URI=your-atlas-uri
+JWT_SECRET=your-long-random-production-secret
+JWT_EXPIRES_IN=7d
+AWS_ACCESS_KEY_ID=your-aws-access-key
+AWS_SECRET_ACCESS_KEY=your-aws-secret-key
+AWS_REGION=eu-north-1
+AWS_BUCKET_NAME=suugaanta-media-bucket
+```
 
-Database: MongoDB Atlas
+## Database
 
-- Add the Render outbound IP/network access rule.
-- Use the Atlas connection string only in environment variables.
+- Use MongoDB Atlas.
+- Add the Render outbound IP/network access rule if your Atlas project is not open to all trusted deployment IPs.
+- Store the Atlas connection string only in Render environment variables.
 
-Storage: AWS S3
+## Storage
 
+- Use AWS S3 for uploaded media.
 - Use IAM credentials with the minimum permissions needed for uploads.
-- Store AWS keys only in deployment environment variables.
+- Store AWS keys only in Render environment variables.
