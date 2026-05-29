@@ -7,6 +7,7 @@ import {
   getAuthorSongs,
 } from "../api/services/authorService";
 import { ErrorState, LoadingSpinner } from "../components/common/FeedbackStates";
+import CommentSection from "../components/comments/CommentSection";
 import Pagination from "../components/common/Pagination";
 
 const tabs = [
@@ -352,6 +353,12 @@ function AuthorProfilePage() {
           )}
         </div>
       </section>
+
+      <CommentSection
+        resourceType="author"
+        resourceId={author._id}
+        title={`${author.name} Discussion`}
+      />
     </div>
   );
 }

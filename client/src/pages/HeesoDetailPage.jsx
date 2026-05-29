@@ -3,6 +3,7 @@ import { getSongByIdentifier } from "../api/services/songService";
 import ResourceDetailPage from "./ResourceDetailPage";
 
 const config = {
+  resourceType: "song",
   navLabel: "Heeso",
   backTo: "/heeso",
   loadingLabel: "song",

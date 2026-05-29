@@ -3,6 +3,7 @@ import { getPoetryByIdentifier } from "../api/services/poetryService";
 import ResourceDetailPage from "./ResourceDetailPage";
 
 const config = {
+  resourceType: "poetry",
   navLabel: "Gabayo",
   backTo: "/gabayo",
   loadingLabel: "poem",

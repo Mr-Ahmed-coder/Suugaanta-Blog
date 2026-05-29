@@ -8,6 +8,7 @@ const excerpt = (text = "") => {
 };
 
 const config = {
+  resourceType: "history",
   navLabel: "Taariikho",
   backTo: "/taariikho",
   loadingLabel: "article",

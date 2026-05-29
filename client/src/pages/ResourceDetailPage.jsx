@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ErrorState, LoadingSpinner } from "../components/common/FeedbackStates";
+import CommentSection from "../components/comments/CommentSection";
 import useResourceDetail from "../hooks/useResourceDetail";
 
 const formatDate = (date) => {
@@ -162,6 +163,14 @@ function ResourceDetailPage({ config }) {
       )}
 
       {config.renderExtra?.(item)}
+
+      {config.resourceType && (
+        <CommentSection
+          resourceType={config.resourceType}
+          resourceId={item._id}
+          title={`${config.navLabel} Discussion`}
+        />
+      )}
     </article>
   );
 }
