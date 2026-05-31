@@ -7,6 +7,7 @@ import {
   getAuthorSongs,
 } from "../api/services/authorService";
 import { ErrorState, LoadingSpinner } from "../components/common/FeedbackStates";
+import FavoriteButton from "../components/common/FavoriteButton";
 import CommentSection from "../components/comments/CommentSection";
 import Pagination from "../components/common/Pagination";
 
@@ -215,12 +216,17 @@ function AuthorProfilePage() {
             <Link to="/abwaano" className="text-sm font-semibold text-brand-gold-dark hover:text-brand-green-900">
               Back to Abwaano
             </Link>
-            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.22em] text-brand-gold-dark">
-              Abwaan Profile
-            </p>
-            <h1 className="mt-3 font-display text-4xl font-bold leading-tight text-brand-green-950 sm:text-5xl">
-              {author.name}
-            </h1>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-brand-gold-dark">
+                  Abwaan Profile
+                </p>
+                <h1 className="mt-3 font-display text-4xl font-bold leading-tight text-brand-green-950 sm:text-5xl">
+                  {author.name}
+                </h1>
+              </div>
+              <FavoriteButton resourceType="author" resourceId={author._id} />
+            </div>
             <p className="mt-3 text-sm font-semibold text-brand-green-700">{getLifespan(author)}</p>
 
             {author.specialties?.length > 0 && (

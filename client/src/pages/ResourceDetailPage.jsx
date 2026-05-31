@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ErrorState, LoadingSpinner } from "../components/common/FeedbackStates";
+import FavoriteButton from "../components/common/FavoriteButton";
 import CommentSection from "../components/comments/CommentSection";
 import useResourceDetail from "../hooks/useResourceDetail";
 
@@ -126,12 +127,19 @@ function ResourceDetailPage({ config }) {
         )}
 
         <div className="p-6 sm:p-8 lg:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold-dark">
-            {config.navLabel}
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-bold leading-tight text-brand-green-950 sm:text-5xl">
-            {title}
-          </h1>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-gold-dark">
+                {config.navLabel}
+              </p>
+              <h1 className="mt-3 font-display text-4xl font-bold leading-tight text-brand-green-950 sm:text-5xl">
+                {title}
+              </h1>
+            </div>
+            {config.resourceType && (
+              <FavoriteButton resourceType={config.resourceType} resourceId={item._id} />
+            )}
+          </div>
           {config.getSubtitle(item) && (
             <p className="mt-4 text-lg font-semibold text-brand-green-800">{config.getSubtitle(item)}</p>
           )}

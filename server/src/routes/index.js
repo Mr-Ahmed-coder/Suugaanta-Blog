@@ -8,6 +8,7 @@ import uploadRoutes from "./upload.routes.js";
 import statsRoutes from "./stats.routes.js";
 import commentRoutes from "./comment.routes.js";
 import searchRoutes from "./search.routes.js";
+import favoriteRoutes from "./favorite.routes.js";
 
 import userRoutes from "./user.routes.js";
 
@@ -18,6 +19,7 @@ router.use("/upload", uploadRoutes);
 router.use("/stats", statsRoutes);
 router.use("/comments", commentRoutes);
 router.use("/search", searchRoutes);
+router.use("/favorites", favoriteRoutes);
 router.use("/users", userRoutes);
 router.use("/songs", songRoutes);
 router.use("/poetry", poetryRoutes);

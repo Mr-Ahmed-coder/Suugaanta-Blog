@@ -11,6 +11,7 @@ import TaariikhoDetailPage from "../pages/TaariikhoDetailPage";
 import AuthorProfilePage from "../pages/AuthorProfilePage";
 import AboutPage from "../pages/AboutPage";
 import SearchPage from "../pages/SearchPage";
+import MyLibraryPage from "../pages/MyLibraryPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import { AuthProvider } from "../context/AuthContext";
@@ -50,6 +51,14 @@ const router = createBrowserRouter([
       { path: "abwaano/:slug", element: <AuthorProfilePage /> },
       { path: "about", element: <AboutPage /> },
       { path: "search", element: <SearchPage /> },
+      {
+        path: "my-library",
+        element: (
+          <ProtectedRoute>
+            <MyLibraryPage />
+          </ProtectedRoute>
+        ),
+      },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
     ],
