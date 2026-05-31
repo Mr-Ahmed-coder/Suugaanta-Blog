@@ -10,6 +10,7 @@ import GabayoDetailPage from "../pages/GabayoDetailPage";
 import TaariikhoDetailPage from "../pages/TaariikhoDetailPage";
 import AuthorProfilePage from "../pages/AuthorProfilePage";
 import AboutPage from "../pages/AboutPage";
+import SearchPage from "../pages/SearchPage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import { AuthProvider } from "../context/AuthContext";
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
       { path: "abwaano", element: <AbwaanoPage /> },
       { path: "abwaano/:slug", element: <AuthorProfilePage /> },
       { path: "about", element: <AboutPage /> },
+      { path: "search", element: <SearchPage /> },
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
     ],

@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 const navItems = [
@@ -12,6 +13,18 @@ const navItems = [
 
 function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const query = searchQuery.trim();
+
+    if (query) {
+      navigate(`/search?q=${encodeURIComponent(query)}`);
+      setSearchQuery("");
+    }
+  };
 
   return (
     <header className="border-b border-brand-gold/30 bg-brand-green-950 text-brand-cream shadow-soft">
@@ -46,6 +59,26 @@ function Navbar() {
               ))}
             </ul>
           </nav>
+
+          <form onSubmit={handleSearch} className="flex w-full items-center gap-2 border-t border-brand-gold/10 pt-4 lg:w-auto lg:border-t-0 lg:pt-0">
+            <label htmlFor="navbar-search" className="sr-only">
+              Search archive
+            </label>
+            <input
+              id="navbar-search"
+              type="search"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="Search archive"
+              className="min-h-10 w-full rounded-full border border-brand-gold/25 bg-brand-surface/10 px-4 text-sm text-brand-cream placeholder:text-brand-cream/50 transition focus:border-brand-gold focus:bg-brand-surface/15 focus:outline-none focus:ring-1 focus:ring-brand-gold lg:w-44 xl:w-56"
+            />
+            <button
+              type="submit"
+              className="rounded-full border border-brand-gold/40 px-4 py-2 text-sm font-semibold text-brand-gold transition hover:bg-brand-gold hover:text-brand-green-950"
+            >
+              Search
+            </button>
+          </form>
 
           <div className="flex items-center gap-3 border-t border-brand-gold/10 pt-4 lg:border-t-0 lg:pt-0">
             {isAuthenticated ? (
