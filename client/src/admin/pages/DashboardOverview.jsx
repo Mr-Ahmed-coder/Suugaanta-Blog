@@ -46,7 +46,7 @@ function DashboardOverview() {
   }
 
   const statCards = [
-    { label: "Heeso", count: counts.songs, link: "/admin/songs", icon: "Songs" },
+    { label: "Maqal", count: counts.songs, link: "/admin/songs", icon: "Audio" },
     { label: "Gabayo", count: counts.poetry, link: "/admin/poetry", icon: "Poetry" },
     { label: "Taariikho", count: counts.history, link: "/admin/history", icon: "History" },
     { label: "Abwaano", count: counts.authors, link: "/admin/authors", icon: "Authors" },
@@ -98,8 +98,8 @@ function DashboardOverview() {
               to="/admin/songs/new"
               className="rounded-xl border border-brand-gold/10 bg-brand-cream/15 p-4 hover:border-brand-gold/30 hover:bg-brand-cream/35 transition"
             >
-              <p className="text-sm font-bold text-brand-green-950">Add Song</p>
-              <p className="mt-1 text-[11px] text-brand-green-700/80">Create a new song with metadata and lyrics</p>
+              <p className="text-sm font-bold text-brand-green-950">Add Maqal</p>
+              <p className="mt-1 text-[11px] text-brand-green-700/80">Create a new Maqal entry with metadata and lyrics</p>
             </Link>
 
             <Link

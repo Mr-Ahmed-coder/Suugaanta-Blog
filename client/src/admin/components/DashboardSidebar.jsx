@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const adminNavItems = [
   { label: "Overview", to: "/admin", icon: "📊", end: true },
-  { label: "Heeso", to: "/admin/songs", icon: "🎵" },
+  { label: "Maqal", to: "/admin/songs", icon: "🎵" },
   { label: "Gabayo", to: "/admin/poetry", icon: "✍️" },
   { label: "Taariikho", to: "/admin/history", icon: "📚" },
   { label: "Abwaano", to: "/admin/authors", icon: "👤" },

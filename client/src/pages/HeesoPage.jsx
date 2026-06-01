@@ -35,9 +35,9 @@ function HeesoPage() {
   return (
     <div className="space-y-6">
       <PageHero
-        eyebrow="Heeso"
-        title="Somali Song Archive"
-        description="Explore classic and modern Somali songs, audio archive, and lyrics."
+        eyebrow="Maqal"
+        title="Somali Maqal Archive"
+        description="Explore classic and modern Somali audio works, archive recordings, and lyrics."
       />
 
       <FilterBar
@@ -48,15 +48,15 @@ function HeesoPage() {
         sort={sort}
         onSortChange={handleSort}
         categories={SONG_CATEGORIES}
-        placeholder="Search songs or artists..."
+        placeholder="Search Maqal or artists..."
       />
 
-      {loading && <LoadingSpinner message="Loading songs..." />}
+      {loading && <LoadingSpinner message="Loading Maqal..." />}
 
       {error && <ErrorState error={error} />}
 
       {!loading && !error && songs.length === 0 && (
-        <EmptyState message="No songs match your search." />
+        <EmptyState message="No Maqal entries match your search." />
       )}
 
       {!loading && !error && songs.length > 0 && (

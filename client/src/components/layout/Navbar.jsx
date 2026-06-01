@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const navItems = [
   { label: "Home", to: "/" },
-  { label: "Heeso", to: "/heeso" },
+  { label: "Maqal", to: "/heeso" },
   { label: "Gabayo", to: "/gabayo" },
   { label: "Taariikho", to: "/taariikho" },
   { label: "Abwaano", to: "/abwaano" },

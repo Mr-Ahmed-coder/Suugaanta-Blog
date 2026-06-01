@@ -44,7 +44,7 @@ function ManageSongs() {
       setDeleteTarget(null);
       refetch(); // Reload collection data
     } catch (err) {
-      setDeleteError(err?.response?.data?.message || "Failed to delete song. Please try again.");
+      setDeleteError(err?.response?.data?.message || "Failed to delete Maqal. Please try again.");
     } finally {
       setDeleting(false);
     }
@@ -55,9 +55,9 @@ function ManageSongs() {
       {/* Page Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-display text-3xl font-bold text-brand-green-950">Manage Heeso</h1>
+          <h1 className="font-display text-3xl font-bold text-brand-green-950">Manage Maqal</h1>
           <p className="mt-1 text-sm text-brand-green-800">
-            Create, update, or remove songs from the archive.
+            Create, update, or remove Maqal entries from the archive.
           </p>
         </div>
         <Link
@@ -77,7 +77,7 @@ function ManageSongs() {
         sort={sort}
         onSortChange={handleSort}
         categories={CATEGORIES}
-        placeholder="Search songs or artists..."
+        placeholder="Search Maqal or artists..."
       />
 
       {deleteError && (
@@ -86,12 +86,12 @@ function ManageSongs() {
         </div>
       )}
 
-      {loading && <LoadingSpinner message="Loading songs..." />}
+      {loading && <LoadingSpinner message="Loading Maqal..." />}
 
       {error && <ErrorState error={error} />}
 
       {!loading && !error && songs.length === 0 && (
-        <EmptyState message="No songs match your search." />
+        <EmptyState message="No Maqal entries match your search." />
       )}
 
       {!loading && !error && songs.length > 0 && (

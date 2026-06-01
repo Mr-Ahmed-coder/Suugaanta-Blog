@@ -4,7 +4,7 @@ import ResourceDetailPage from "./ResourceDetailPage";
 
 const config = {
   resourceType: "song",
-  navLabel: "Heeso",
+  navLabel: "Maqal",
   backTo: "/heeso",
   loadingLabel: "song",
   fetchItem: getSongByIdentifier,

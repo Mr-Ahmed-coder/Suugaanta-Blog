@@ -78,7 +78,7 @@ function SongForm() {
           tags: song.tags ? song.tags.join(", ") : "",
         });
       } catch (err) {
-        setError(err?.response?.data?.message || "Failed to load song data. Please try again.");
+        setError(err?.response?.data?.message || "Failed to load Maqal data. Please try again.");
       } finally {
         setFetching(false);
       }
@@ -142,14 +142,14 @@ function SongForm() {
       }
       navigate("/admin/songs");
     } catch (err) {
-      setError(err?.response?.data?.message || "Failed to save song. Please verify input formats.");
+      setError(err?.response?.data?.message || "Failed to save Maqal. Please verify input formats.");
     } finally {
       setSubmitting(false);
     }
   };
 
   if (fetching) {
-    return <LoadingSpinner message="Loading song details..." />;
+    return <LoadingSpinner message="Loading Maqal details..." />;
   }
 
   const filteredAuthors = authors.filter((author) =>
@@ -161,7 +161,7 @@ function SongForm() {
       {/* Title Header */}
       <div className="flex items-center justify-between border-b border-brand-gold/10 pb-4">
         <h1 className="font-display text-2xl font-bold text-brand-green-950">
-          {isEditMode ? "Edit Hees" : "Create New Hees"}
+          {isEditMode ? "Edit Maqal" : "Create New Maqal"}
         </h1>
         <Link to="/admin/songs" className="text-xs font-bold text-brand-gold-dark hover:text-brand-green-900 transition">
           ← Back
@@ -379,7 +379,7 @@ function SongForm() {
             value={formData.description}
             onChange={handleChange}
             rows={3}
-            placeholder="Enter song description..."
+            placeholder="Enter Maqal description..."
             className="mt-2 block w-full rounded-xl border border-brand-gold/30 bg-brand-cream/5 px-4 py-2.5 text-sm text-brand-green-950 placeholder:text-brand-green-700/30 focus:border-brand-gold-dark focus:bg-brand-surface focus:outline-none focus:ring-1 focus:ring-brand-gold-dark transition"
           />
         </div>
@@ -394,7 +394,7 @@ function SongForm() {
             value={formData.lyrics}
             onChange={handleChange}
             rows={6}
-            placeholder="Enter song lyrics..."
+            placeholder="Enter Maqal lyrics..."
             className="mt-2 block w-full rounded-xl border border-brand-gold/30 bg-brand-cream/5 px-4 py-2.5 text-sm text-brand-green-950 placeholder:text-brand-green-700/30 focus:border-brand-gold-dark focus:bg-brand-surface focus:outline-none focus:ring-1 focus:ring-brand-gold-dark transition font-serif leading-relaxed"
           />
         </div>
@@ -413,7 +413,7 @@ function SongForm() {
           ) : uploadingActive ? (
             <span>Uploading file...</span>
           ) : (
-            <span>Save Hees</span>
+            <span>Save Maqal</span>
           )}
         </button>
       </form>

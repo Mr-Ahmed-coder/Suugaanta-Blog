@@ -65,7 +65,7 @@ function HomePage() {
           Suugaanta Soomaliyeed
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-brand-cream/80 sm:text-lg">
-          Welcome to the home of Somali poetry, song collections, and historical archives. Discover and reconnect with the cultural wealth preserved across generations.
+          Welcome to the home of Somali poetry, Maqal collections, and historical archives. Discover and reconnect with the cultural wealth preserved across generations.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -73,7 +73,7 @@ function HomePage() {
             to="/heeso"
             className="rounded-full bg-brand-gold px-6 py-3 text-sm font-semibold text-brand-green-950 hover:bg-brand-gold-dark transition shadow-soft"
           >
-            Listen to Songs
+            Explore Maqal
           </Link>
           <Link
             to="/gabayo"
@@ -86,7 +86,7 @@ function HomePage() {
 
       <section className="grid gap-6 grid-cols-2 lg:grid-cols-4">
         {[
-          { label: "Heeso", count: stats.songs, link: "/heeso", eyebrow: "Songs" },
+          { label: "Maqal", count: stats.songs, link: "/heeso", eyebrow: "Audio" },
           { label: "Gabayo", count: stats.poetry, link: "/gabayo", eyebrow: "Poetry" },
           { label: "Taariikho", count: stats.history, link: "/taariikho", eyebrow: "History" },
           { label: "Abwaano", count: stats.authors, link: "/abwaano", eyebrow: "Authors" },
@@ -127,7 +127,7 @@ function HomePage() {
             {featured.song && (
               <div className="rounded-2xl border border-brand-gold/20 bg-brand-surface p-6 shadow-soft flex flex-col justify-between">
                 <div>
-                  <span className="text-[10px] uppercase font-semibold tracking-wider text-brand-gold-dark">Featured Song</span>
+                  <span className="text-[10px] uppercase font-semibold tracking-wider text-brand-gold-dark">Featured Maqal</span>
                   <h3 className="mt-2 font-display text-xl font-bold text-brand-green-950">{featured.song.title}</h3>
                   <p className="text-xs font-medium text-brand-green-800">
                     Artist: {featured.song.writer?.name || featured.song.author?.name || featured.song.artist || featured.song.performer || "Archive entry"}
@@ -137,7 +137,7 @@ function HomePage() {
                   )}
                 </div>
                 <Link to="/heeso" className="mt-4 inline-flex items-center text-xs font-semibold text-brand-gold-dark hover:text-brand-green-950">
-                  Listen in Archive
+                  Open Maqal Archive
                 </Link>
               </div>
             )}

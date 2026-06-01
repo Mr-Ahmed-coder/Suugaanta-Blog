@@ -33,8 +33,8 @@ const favoriteConfig = {
     getImage: (item) => item.featuredImage || item.photo,
   },
   songs: {
-    title: "Saved Songs",
-    typeLabel: "Hees",
+    title: "Saved Maqal",
+    typeLabel: "Maqal",
     getPath: (item) => `/heeso/${item.slug || item._id}`,
     getTitle: (item) => item.title,
     getSubtitle: (item) => item.writer?.name || item.author?.name || item.artist || item.performer || item.category,
@@ -205,14 +205,14 @@ function MyLibraryPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold-dark">Personal Archive</p>
         <h1 className="mt-3 font-display text-4xl font-bold text-brand-green-950">My Library</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-green-800/80">
-          A private place to return to the songs, poems, histories, and Abwaano profiles you want to keep close.
+          A private place to return to the Maqal, poems, histories, and Abwaano profiles you want to keep close.
         </p>
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <CountCard label="Total" value={meta.totalItems || 0} />
         <CountCard label="Abwaano" value={meta.authorsCount || 0} />
-        <CountCard label="Heeso" value={meta.songsCount || 0} />
+        <CountCard label="Maqal" value={meta.songsCount || 0} />
         <CountCard label="Gabayo" value={meta.poetryCount || 0} />
         <CountCard label="Taariikho" value={meta.historyCount || 0} />
       </section>

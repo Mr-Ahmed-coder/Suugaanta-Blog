@@ -156,14 +156,14 @@ function SearchPage() {
     },
     {
       key: "songs",
-      title: "Heeso",
+      title: "Maqal",
       count: meta.songsCount || 0,
       items: results.songs || [],
       render: (song) => (
         <ResultCard
           key={song._id}
           to={`/heeso/${song.slug || song._id}`}
-          type="Hees"
+          type="Maqal"
           title={song.title}
           subtitle={song.writer?.name || song.author?.name || song.artist || song.performer || song.category}
           description={song.description || song.lyrics}
@@ -221,14 +221,14 @@ function SearchPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-gold-dark">Archive Search</p>
         <h1 className="mt-3 font-display text-4xl font-bold text-brand-green-950">Search the Archive</h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-brand-green-800/80">
-          Search across Abwaano profiles, songs, poetry, and historical records from one quiet catalog view.
+          Search across Abwaano profiles, Maqal, poetry, and historical records from one quiet catalog view.
         </p>
         <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
           <input
             type="search"
             value={inputValue}
             onChange={(event) => setInputValue(event.target.value)}
-            placeholder="Search Hadraawi, gabay, hees..."
+            placeholder="Search Hadraawi, gabay, Maqal..."
             className="min-h-12 flex-1 rounded-2xl border border-brand-gold/30 bg-brand-cream/10 px-4 text-sm text-brand-green-950 placeholder:text-brand-green-700/45 transition focus:border-brand-gold-dark focus:bg-brand-surface focus:outline-none focus:ring-1 focus:ring-brand-gold-dark"
           />
           <button
@@ -244,7 +244,7 @@ function SearchPage() {
         <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           <CountCard label="Total" value={meta.totalResults || 0} />
           <CountCard label="Abwaano" value={meta.authorsCount || 0} />
-          <CountCard label="Heeso" value={meta.songsCount || 0} />
+          <CountCard label="Maqal" value={meta.songsCount || 0} />
           <CountCard label="Gabayo" value={meta.poetryCount || 0} />
           <CountCard label="Taariikho" value={meta.historyCount || 0} />
         </section>

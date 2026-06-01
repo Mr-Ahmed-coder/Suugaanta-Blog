@@ -14,7 +14,7 @@ import RelatedContent from "../components/common/RelatedContent";
 
 const tabs = [
   { key: "poetry", label: "Poetry" },
-  { key: "songs", label: "Songs" },
+  { key: "songs", label: "Maqal" },
   { key: "history", label: "Historical Mentions" },
 ];
 
@@ -248,7 +248,7 @@ function AuthorProfilePage() {
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               <Stat label="Poetry" value={counts.poetry || 0} />
-              <Stat label="Songs" value={counts.songs || 0} />
+              <Stat label="Maqal" value={counts.songs || 0} />
               <Stat label="History" value={counts.history || 0} />
             </div>
           </div>

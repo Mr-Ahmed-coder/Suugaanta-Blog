@@ -27,8 +27,8 @@ const sections = [
   },
   {
     key: "relatedSongs",
-    title: "Related Songs",
-    label: "Hees",
+    title: "Related Maqal",
+    label: "Maqal",
     path: (item) => `/heeso/${item.slug || item._id}`,
     titleFor: (item) => item.title,
     descriptionFor: (item) => item.description || item.lyrics,
