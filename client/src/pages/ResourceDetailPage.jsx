@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ErrorState, LoadingSpinner } from "../components/common/FeedbackStates";
 import FavoriteButton from "../components/common/FavoriteButton";
+import RelatedContent from "../components/common/RelatedContent";
 import CommentSection from "../components/comments/CommentSection";
 import useResourceDetail from "../hooks/useResourceDetail";
 
@@ -171,6 +172,10 @@ function ResourceDetailPage({ config }) {
       )}
 
       {config.renderExtra?.(item)}
+
+      {config.resourceType && (
+        <RelatedContent resourceType={config.resourceType} resourceId={item._id} />
+      )}
 
       {config.resourceType && (
         <CommentSection

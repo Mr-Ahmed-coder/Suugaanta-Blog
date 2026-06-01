@@ -10,6 +10,7 @@ import { ErrorState, LoadingSpinner } from "../components/common/FeedbackStates"
 import FavoriteButton from "../components/common/FavoriteButton";
 import CommentSection from "../components/comments/CommentSection";
 import Pagination from "../components/common/Pagination";
+import RelatedContent from "../components/common/RelatedContent";
 
 const tabs = [
   { key: "poetry", label: "Poetry" },
@@ -314,51 +315,31 @@ function AuthorProfilePage() {
         )}
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-3xl border border-brand-gold/20 bg-brand-surface p-6 shadow-soft sm:p-8">
-          <h2 className="font-display text-2xl font-bold text-brand-green-950">Related Authors</h2>
-          {author.relatedAuthors?.length ? (
-            <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              {author.relatedAuthors.map((related) => (
-                <Link
-                  key={related._id}
-                  to={`/abwaano/${related.slug}`}
-                  className="rounded-2xl border border-brand-gold/15 p-4 transition hover:bg-brand-green-50"
-                >
-                  <p className="font-semibold text-brand-green-950">{related.name}</p>
-                  <p className="mt-1 text-xs text-brand-green-700">{related.specialties?.join(", ") || "Archive profile"}</p>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-4 text-sm leading-6 text-brand-green-800/75">Related author links can be added as the archive grows.</p>
-          )}
-        </div>
-
-        <div className="rounded-3xl border border-brand-gold/20 bg-brand-surface p-6 shadow-soft sm:p-8">
-          <h2 className="font-display text-2xl font-bold text-brand-green-950">Media Archive</h2>
-          {author.mediaAssets?.length ? (
-            <div className="mt-5 space-y-3">
-              {author.mediaAssets.map((asset) => (
-                <a
-                  key={`${asset.url}-${asset.title}`}
-                  href={asset.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-2xl border border-brand-gold/15 p-4 transition hover:bg-brand-green-50"
-                >
-                  <p className="text-sm font-semibold text-brand-green-950">{asset.title || asset.type}</p>
-                  {asset.description && <p className="mt-1 text-xs text-brand-green-700">{asset.description}</p>}
-                </a>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-4 text-sm leading-6 text-brand-green-800/75">
-              Future media support is ready for interviews, documentaries, manuscripts, and gallery assets.
-            </p>
-          )}
-        </div>
+      <section className="rounded-3xl border border-brand-gold/20 bg-brand-surface p-6 shadow-soft sm:p-8">
+        <h2 className="font-display text-2xl font-bold text-brand-green-950">Media Archive</h2>
+        {author.mediaAssets?.length ? (
+          <div className="mt-5 space-y-3">
+            {author.mediaAssets.map((asset) => (
+              <a
+                key={`${asset.url}-${asset.title}`}
+                href={asset.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-2xl border border-brand-gold/15 p-4 transition hover:bg-brand-green-50"
+              >
+                <p className="text-sm font-semibold text-brand-green-950">{asset.title || asset.type}</p>
+                {asset.description && <p className="mt-1 text-xs text-brand-green-700">{asset.description}</p>}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-4 text-sm leading-6 text-brand-green-800/75">
+            Future media support is ready for interviews, documentaries, manuscripts, and gallery assets.
+          </p>
+        )}
       </section>
+
+      <RelatedContent resourceType="author" resourceId={author._id} />
 
       <CommentSection
         resourceType="author"
